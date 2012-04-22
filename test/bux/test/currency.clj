@@ -5,7 +5,7 @@
 
 (deftest creating-currency
   (let [ params {:symbol "$", :decimal_mark ",", :thousands_separator ".", :subunit "Centavo", :name "Argentine Peso", :iso_code "ARS", :iso_numeric "032", 
-    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :priority 100} 
+    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :decimal_points 2, :priority 100} 
          c (create-currency params )]
       (is (= (:symbol c) "$"))
       (is (= (:decimal_mark c) ","))
@@ -23,7 +23,7 @@
 
 (deftest testing-defcurrency
   (let [ params {:symbol "$", :decimal_mark ",", :thousands_separator ".", :subunit "Centavo", :name "Argentine Peso", :iso_code "ARS", :iso_numeric "032", 
-    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :priority 100} 
+    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :decimal_points 2, :priority 100} 
          v (defcurrency params )
          c (var-get v)]
       (is (= (:symbol c) "$"))
