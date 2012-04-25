@@ -160,7 +160,8 @@
   {:symbol "S/.", :decimal_mark ".", :thousands_separator ",", :subunit "Céntimo", :name "Peruvian Nuevo Sol", :iso_code "PEN", :iso_numeric "604", :subunit_to_unit 100, :html_entity "S/.", :symbol_first true, :decimal_points 2 :priority 100} 
   {:symbol "₲", :decimal_mark ".", :thousands_separator ",", :subunit "Céntimo", :name "Paraguayan Guaraní", :iso_code "PYG", :iso_numeric "600", :subunit_to_unit 100, :html_entity "&#x20B2;", :symbol_first true, :decimal_points 2 :priority 100} 
   {:symbol "$", :decimal_mark ".", :thousands_separator ",", :subunit "Cent", :name "Barbadian Dollar", :iso_code "BBD", :iso_numeric "052", :subunit_to_unit 100, :html_entity "$", :symbol_first false, :decimal_points 2 :priority 100} 
-  {:symbol "Q", :decimal_mark ".", :thousands_separator ",", :subunit "Centavo", :name "Guatemalan Quetzal", :iso_code "GTQ", :iso_numeric "320", :subunit_to_unit 100, :html_entity "", :symbol_first true, :decimal_points 2 :priority 100}])
+  {:symbol "Q", :decimal_mark ".", :thousands_separator ",", :subunit "Centavo", :name "Guatemalan Quetzal", :iso_code "GTQ", :iso_numeric "320", :subunit_to_unit 100, :html_entity "", :symbol_first true, :decimal_points 2 :priority 100}
+  {:symbol "฿", :decimal_mark ".", :thousands_separator ",", :subunit "Satoshi", :name "Bitcoin", :iso_code "BTC", :subunit_to_unit 100000000, :symbol_first true, :decimal_points 4 :priority 1}])
 
 (doseq [c all-currencies]
   (defcurrency c))
