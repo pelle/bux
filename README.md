@@ -2,6 +2,8 @@
 
 A money and currency manipulation library for Clojure
 
+[![Build Status](https://secure.travis-ci.org/pelle/bux.png)](http://travis-ci.org/pelle/bux)
+
 ## Usage
 
 Add the following to your project.clj
