@@ -2,13 +2,11 @@
 
 A money and currency manipulation library for Clojure
 
-_Note_ This is usable for simple amount formatting now. Calculations dont work correctly.
-
 ## Usage
 
 Add the following to your project.clj
 
-    [bux "0.0.1"]
+    [bux "0.0.2"]
 
 ### Currencies
 
@@ -57,7 +55,7 @@ Amount formatting should work for the majority of currencies.
 
 ## Big todos I need to fix now
 
-Calculations result in longs. Still trying to figure this out.
+Calculations don't work for more than 2 params at the moment.
 
 ## Future
 

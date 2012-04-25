@@ -8,13 +8,21 @@
     (invoke [this] (this 0)) 
     (invoke [this cents] (create-money this cents)) 
     (applyTo [this args] (clojure.lang.AFn/applyToHelper this args))
-  FormatString
-    (format-string [this]
-      (let [base (str "%" thousands_separator decimal_mark decimal_points "f")]
-        (if symbol_first
-          (str symbol base)
-          (str base symbol)
-        ))))
+  AmountFormattable
+    (amount-formatter [_]
+      (let [fs (if (= 0 decimal_points) "#,###,###" (str "#,###,###." (reduce str (repeat decimal_points "#"))))]
+          (java.text.DecimalFormat. fs)
+        ))
+    (format-amount [this amount]
+      (let [ s (.format (amount-formatter this) amount)]
+        (if symbol 
+          (if symbol_first
+            (str symbol s)
+            (str s " " symbol))
+          s )))
+
+    (parse-amount [this value]
+      (create-money this (.parse (amount-formatter this) value))))
   
 
 (defn create-currency
