@@ -8,7 +8,7 @@ A money and currency manipulation library for Clojure
 
 Add the following to your project.clj
 
-    [bux "0.0.2"]
+    [bux "0.0.3"]
 
 ### Currencies
 
