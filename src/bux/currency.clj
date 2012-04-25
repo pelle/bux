@@ -3,7 +3,7 @@
 
 
 (defrecord Currency 
-  [iso_code name symbol subunit subunit_to_unit symbol_first html_entity decimal_mark thousands_separator iso_numeric decimal_points priority]
+  [iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority]
   clojure.lang.IFn 
     (invoke [this] (this 0)) 
     (invoke [this cents] (create-money this cents)) 
@@ -30,10 +30,10 @@
   ([ params ]
     (apply create-currency
       (map params 
-        [:iso_code :name :symbol :subunit :subunit_to_unit :symbol_first :html_entity :decimal_mark :thousands_separator :iso_numeric :decimal_points :priority]) ))
+        [:iso_code :name :symbol :subunit :subunit_to_unit :symbol_first :html_entity :iso_numeric :decimal_points :priority]) ))
 
-  ([iso_code name symbol subunit subunit_to_unit symbol_first html_entity decimal_mark thousands_separator iso_numeric decimal_points priority]
-    (Currency. iso_code name symbol subunit subunit_to_unit symbol_first html_entity decimal_mark thousands_separator iso_numeric decimal_points priority)))
+  ([iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority]
+    (Currency. iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority)))
 
 
 (defn defcurrency 
