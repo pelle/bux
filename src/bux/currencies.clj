@@ -37,7 +37,7 @@
   {:symbol nil, :subunit "Chertrum", :name "Bhutanese Ngultrum", :iso-code "BTN", :iso-numeric "064", :subunit-to-unit 100, :html-entity "", :symbol-first false, :decimal-points 2 :priority 100} 
   {:symbol "$", :subunit "Cent", :name "Singapore Dollar", :iso-code "SGD", :iso-numeric "702", :subunit-to-unit 100, :html-entity "$", :symbol-first true, :decimal-points 2 :priority 100} 
   {:symbol "$", :subunit "Cent", :name "Zimbabwean Dollar", :iso-code "ZWD", :iso-numeric "716", :subunit-to-unit 100, :html-entity "$", :symbol-first true, :decimal-points 2 :priority 100} 
-  {:symbol "kr", :subunit "Øre", :name "Danish Krone", :iso-code "DKK", :iso-numeric "208", :subunit-to-unit 100, :html-entity "", :symbol-first true, :decimal-points 2 :priority 100} 
+  {:symbol "kr", :subunit "Øre", :name "Danish Krone", :iso-code "DKK", :iso-numeric "208", :subunit-to-unit 100, :html-entity "", :symbol-first false, :decimal-points 2 :priority 100} 
   {:symbol "Sk", :subunit "Halier", :name "Slovak Koruna", :iso-code "SKK", :iso-numeric "703", :subunit-to-unit 100, :html-entity "", :symbol-first true, :decimal-points 2 :priority 100} 
   {:symbol "ب.د", :subunit "Fils", :name "Bahraini Dinar", :iso-code "BHD", :iso-numeric "048", :subunit-to-unit 1000, :html-entity "", :symbol-first true, :decimal-points 3 :priority 100} 
   {:symbol nil, :subunit "Santim", :name "Ethiopian Birr", :iso-code "ETB", :iso-numeric "230", :subunit-to-unit 100, :html-entity "", :symbol-first false, :decimal-points 2 :priority 100} 
