@@ -1,5 +1,6 @@
 (ns bux.test.currency
-  (:use [bux.currency])
+  (:use [bux.currency]
+        [bux.money])
   (:use [clojure.test]))
 
 
@@ -15,7 +16,16 @@
       (is (= (:subunit_to_unit c) 100))
       (is (= (:html_entity c) "&#x20B1;"))
       (is (= (:symbol_first c) true))
-      (is (= (:priority c) 100))))
+      (is (= (:priority c) 100))
+      (let [m (parse-amount c "1.23")]
+        (is (= (value m) 1.23))
+        (is (= (base-value m) 123))
+        (is (= (format-me m) "$1.23")))
+      
+      (let [m (parse-amount c "$1.23")]
+        (is (= (value m) 1.23))
+        (is (= (base-value m) 123))
+        (is (= (format-me m) "$1.23")))))
   
 
 

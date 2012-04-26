@@ -26,3 +26,8 @@
   "calculate and add percentage of value"
   [x p]
   (add x (percentage x p)))
+
+(defn discount
+  "calculate and discount percentage of value"
+  [x p]
+  (subtract x (percentage x p)))

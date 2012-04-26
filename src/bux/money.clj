@@ -2,13 +2,13 @@
   (:require [bux.calc :as calc]))
 
 (defprotocol AmountFormattable
-  (amount-formatter [this])
-  (format-amount [this amount])
-  (parse-amount [this value]))
+  (amount-formatter [this] "returns Decimal formatter with correct decimal points for currency")
+  (format-amount [this amount] "formats amount with currency symbol")
+  (parse-amount [this value] "parse string containing amount"))
 
 
 (defprotocol Formattable
-  (format-me [this]))
+  (format-me [this] "Format amount with symbol"))
 
 (defprotocol Valuable
   (value [this])
@@ -49,6 +49,8 @@
   Object
     (toString [this] (format-me this)))
 
-(defn create-money [currency subunits]
+(defn create-money 
+  "create money using currency and subunits (eg. cents)"
+  [currency subunits]
   (Money. currency  subunits))
 

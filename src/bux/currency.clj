@@ -22,7 +22,7 @@
           s )))
 
     (parse-amount [this value]
-      (create-money this (.parse (amount-formatter this) value))))
+      (create-money this (long (* subunit_to_unit (.parse (amount-formatter this) (first (re-find #"([0123456789.,]+)" value ))))))))
   
 
 (defn create-currency

@@ -8,7 +8,7 @@ A money and currency manipulation library for Clojure
 
 Add the following to your project.clj
 
-    [bux "0.0.3"]
+    [bux "0.0.4"]
 
 ### Currencies
 
@@ -40,6 +40,8 @@ Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 
 ### Money
 
+    (use 'bux.money)
+
 Money objects can be created using a Currency record:
 
     (bux.currencies/USD 123)
@@ -54,6 +56,55 @@ Amount formatting should work for the majority of currencies.
 
     (str (#bux/USD 123))    
     => "$1.23"
+
+Parse strings:
+
+    (parse-amount bux.currencies/USD "$1,123.00")
+    => #<Money $1,123>
+
+### Calculations
+
+Add money:
+
+    (bux.calc/add #bux/USD 123 #bux/USD 234)
+    #<Money $3.57>
+
+    (bux.calc/add #bux/USD 123 2.34)
+    #<Money $3.57>
+
+Subtract:
+
+    (bux.calc/subtract #bux/USD 123 #bux/USD 234)
+    #<Money $-1.11>
+
+    (bux.calc/subtract #bux/USD 123 2.34)
+    #<Money $-1.11>
+
+
+Multiply:
+
+    (bux.calc/multiply #bux/USD 123 5)
+    #<Money $6.15>
+
+Division:
+
+    (bux.calc/divide #bux/USD 123 2)
+    #<Money $0.62>
+
+Percentage:
+
+    (bux.calc/percentage #bux/USD 123 10)
+    #<Money $0.12>    
+
+With Percentage (can be used for including sales tax, commissions etc.):
+
+    (bux.calc/with-percentage #bux/USD 123 10)
+    #<Money $1.35>
+
+Percentage discount:
+
+    (bux.calc/discount #bux/USD 123 10)
+    #<Money $1.11>
 
 ## Big todos I need to fix now
 

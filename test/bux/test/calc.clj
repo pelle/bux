@@ -57,4 +57,11 @@
       (is (= (value fee) 1.35))
       (is (= (format-me fee) "$1.35")))))
 
+(deftest discounting-money
+  (let [ m (create-money USD 123)]
+    (let [fee (bc/discount m 10)]
+      (is (= (value fee) 1.11))
+      (is (= (format-me fee) "$1.11")))))
+
+
 
