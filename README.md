@@ -16,15 +16,15 @@ Add the following to your project.clj
 
 Create a currency using create-currency:
 
-    (create-currency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso_code "ARS", :iso_numeric "032", 
-    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :priority 100})
-    => #bux.currency.Currency{:iso_code "ARS", :name "Argentine Peso", :symbol "$", :subunit "Centavo", :subunit_to_unit 100, :symbol_first true, :html_entity "&#x20B1;", :iso_numeric "032", :priority 100}
+    (create-currency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso-code "ARS", :iso-numeric "032", 
+    :subunit-to-unit 100, :html-entity "&#x20B1;", :symbol-first true, :priority 100})
+    => #bux.currency.Currency{:iso-code "ARS", :name "Argentine Peso", :symbol "$", :subunit "Centavo", :subunit-to-unit 100, :symbol-first true, :html-entity "&#x20B1;", :iso-numeric "032", :priority 100}
 
 
 Define currencies as vars in your current namespace:
 
-    (defcurrency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso_code "ARS", :iso_numeric "032", 
-    :subunit_to_unit 100, :html_entity "&#x20B1;", :symbol_first true, :priority 100})
+    (defcurrency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso-code "ARS", :iso-numeric "032", 
+    :subunit-to-unit 100, :html-entity "&#x20B1;", :symbol-first true, :priority 100})
     => #'user/ARS
 
 Load up predefined currencies:
@@ -34,7 +34,7 @@ Load up predefined currencies:
 This adds all current national currencies to the bux.currencies namespace using the ISO code as the symbol.
 
     bux.currencies/USD
-    => #bux.currency.Currency{:iso_code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent", :subunit_to_unit 100, :symbol_first true, :html_entity "$", :iso_numeric "840", :priority 1}
+    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent", :subunit-to-unit 100, :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
 
 Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 

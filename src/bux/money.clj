@@ -18,9 +18,9 @@
 
 (deftype Money [currency subunits]
   Valuable
-    (value [_] (if (= 0 (:decimal_points currency))
+    (value [_] (if (= 0 (:decimal-points currency))
                  subunits
-                 (double (/ (Math/round (double subunits)) (:subunit_to_unit currency)))))
+                 (double (/ (Math/round (double subunits)) (:subunit-to-unit currency)))))
     (base-value [_] subunits)
 
   calc/Calculator
@@ -29,13 +29,13 @@
           (create-money currency (+ subunits 
             (if (satisfies? Valuable y)
               (base-value y)              
-              (* (:subunit_to_unit currency) y)))))
+              (* (:subunit-to-unit currency) y)))))
     (subtract [x] (create-money currency (- subunits)))
     (subtract [x y] 
           (create-money currency (- subunits 
             (if (satisfies? Valuable y)
               (base-value y)              
-              (* (:subunit_to_unit currency) y)))))
+              (* (:subunit-to-unit currency) y)))))
     (multiply [x] x )
     (multiply [x y] 
           (create-money currency (* subunits y)))

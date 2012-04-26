@@ -3,26 +3,26 @@
 
 
 (defrecord Currency 
-  [iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority]
+  [iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority]
   clojure.lang.IFn 
     (invoke [this] (this 0)) 
     (invoke [this cents] (create-money this cents)) 
     (applyTo [this args] (clojure.lang.AFn/applyToHelper this args))
   AmountFormattable
     (amount-formatter [_]
-      (let [fs (if (= 0 decimal_points) "#,###,###" (str "#,###,###." (reduce str (repeat decimal_points "#"))))]
+      (let [fs (if (= 0 decimal-points) "#,###,###" (str "#,###,###." (reduce str (repeat decimal-points "#"))))]
           (java.text.DecimalFormat. fs)
         ))
     (format-amount [this amount]
       (let [ s (.format (amount-formatter this) amount)]
         (if symbol 
-          (if symbol_first
+          (if symbol-first
             (str symbol s)
             (str s " " symbol))
           s )))
 
     (parse-amount [this value]
-      (create-money this (long (* subunit_to_unit (.parse (amount-formatter this) (first (re-find #"([0123456789.,]+)" value ))))))))
+      (create-money this (long (* subunit-to-unit (.parse (amount-formatter this) (first (re-find #"([0123456789.,]+)" value ))))))))
   
 
 (defn create-currency
@@ -30,15 +30,15 @@
   ([ params ]
     (apply create-currency
       (map params 
-        [:iso_code :name :symbol :subunit :subunit_to_unit :symbol_first :html_entity :iso_numeric :decimal_points :priority]) ))
+        [:iso-code :name :symbol :subunit :subunit-to-unit :symbol-first :html-entity :iso-numeric :decimal-points :priority]) ))
 
-  ([iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority]
-    (Currency. iso_code name symbol subunit subunit_to_unit symbol_first html_entity iso_numeric decimal_points priority)))
+  ([iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority]
+    (Currency. iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority)))
 
 
 (defn defcurrency 
-  "Create a currency and add it as a var to the current namespace using the iso_code as the name"
+  "Create a currency and add it as a var to the current namespace using the iso-code as the name"
   [params]
-  (eval (list 'def (symbol (:iso_code params)) (create-currency params) )))
+  (eval (list 'def (symbol (:iso-code params)) (create-currency params) )))
 
 
