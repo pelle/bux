@@ -165,3 +165,5 @@
 
 (doseq [c all-currencies]
   (defcurrency c))
+
+(def ^:dynamic default-currency (eval (symbol (.getCurrencyCode (.getCurrency (java.text.NumberFormat/getCurrencyInstance))))))

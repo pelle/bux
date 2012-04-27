@@ -40,38 +40,49 @@ Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 
 ### Money
 
-Money is basically clojure numbers representing a currency subunit. So for USD the number would be the amount of cents.
+Money is basically clojure numbers representing. I recommend using bigdec and all calculations will be returned as such.
 
 To format it use the currency object as a function
 
-    (USD 123)
+    (USD 1.23M)
     => "$1.23"
 
 
 Parse strings:
 
     (->$ USD "$1,123.00")
-    => 112300
+    => 1123M
 
 ### Calculations
 
     (use 'bux.calc)
 
+These can use the precision of a currency and take an optional currency parameter for calculating with correct precission.
+
 Percentage:
 
-    (perc 123 10)
-    => 12    
+    (pct 1.23M 10)
+    => 0.12M
+
+    (pct USD 1.231M 10)
+    => 0.12M
+
 
 With Percentage (can be used for including sales tax, commissions etc.):
 
-    (perc+ 123 10)
-    => 135
+    (pct+ 1.23M 10)
+    => 1.35M
+
+    (pct+ USD 1.23M 10)
+    => 1.35M
 
 Percentage discount:
 
-    (perc- 123 10)
-    => 111
+    (pct- 1.23M 10)
+    => 1.11<
 
+    (pct- USD 1.23M 10)
+    => 1.11M
 
 ## License
 
