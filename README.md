@@ -8,7 +8,7 @@ A money and currency manipulation library for Clojure
 
 Add the following to your project.clj
 
-    [bux "0.1.0"]
+    [bux "0.2.0"]
 
 ### Currencies
 
@@ -40,18 +40,34 @@ Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 
 ### Money
 
-Money is basically clojure numbers representing. I recommend using bigdec and all calculations will be returned as such.
+Money is basically BigDecimals set at the scale required for the currency.
 
-To format it use the currency object as a function
+To create a proper BigDecimal from either string or number use the currency as a function:
 
-    (USD 1.23M)
+    (USD 1.23)
+    => 1.23M
+
+    (USD 1.234M)
+    => 1.23M
+
+    (USD "$1.23")
+    => 1.23M
+
+
+To format it without a symbol just use clojure's built in str function
+
+    (str (USD 1.23))
+    => "1.00"
+
+To format it with a symbol use the str$ function:
+
+    (str$ USD 1.23M)
     => "$1.23"
 
+Parse strings directly:
 
-Parse strings:
-
-    (->$ USD "$1,123.00")
-    => 1123M
+    (parse$ USD "$1,123.00")
+    => 1123.00M
 
 ### Calculations
 
