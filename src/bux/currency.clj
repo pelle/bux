@@ -8,7 +8,7 @@
 (defmulti money-formatter "returns Decimal formatter with correct decimal points for currency" :iso-code)
 
 (defrecord Currency 
-  [iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority]
+  [iso-code name symbol subunit symbol-first html-entity iso-numeric decimal-points priority]
   clojure.lang.IFn 
     (invoke [this] (this 0)) 
     (invoke [this value] 
@@ -49,13 +49,8 @@
   ([ params ]
     (apply create-currency
       (map params 
-        [:iso-code :name :symbol :subunit :subunit-to-unit :symbol-first :html-entity :iso-numeric :decimal-points :priority]) ))
+        [:iso-code :name :symbol :subunit :symbol-first :html-entity :iso-numeric :decimal-points :priority]) ))
 
-  ([iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority]
-    (Currency. iso-code name symbol subunit subunit-to-unit symbol-first html-entity iso-numeric decimal-points priority)))
-
-(defn defcurrency 
-  "Create a currency and add it as a var to the current namespace using the iso-code as the name"
-  [params]
-  (eval (list 'def (symbol (:iso-code params)) (create-currency params) )))
+  ([iso-code name symbol subunit symbol-first html-entity iso-numeric decimal-points priority]
+    (Currency. iso-code name symbol subunit symbol-first html-entity iso-numeric decimal-points priority)))
 

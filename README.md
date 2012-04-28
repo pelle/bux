@@ -8,24 +8,17 @@ A money and currency manipulation library for Clojure
 
 Add the following to your project.clj
 
-    [bux "0.2.0"]
+    [bux "0.2.1"]
 
 ### Currencies
 
     (use 'bux.currency)
 
-Create a currency using create-currency:
+Create a custom currency using create-currency:
 
-    (create-currency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso-code "ARS", :iso-numeric "032", 
-    :subunit-to-unit 100, :html-entity "&#x20B1;", :symbol-first true, :priority 100})
-    => #bux.currency.Currency{:iso-code "ARS", :name "Argentine Peso", :symbol "$", :subunit "Centavo", :subunit-to-unit 100, :symbol-first true, :html-entity "&#x20B1;", :iso-numeric "032", :priority 100}
+    (create-currency {:symbol "★", :name "Super points", :iso-code "super-points"})
+    => #bux.currency.Currency{:iso-code "super-points", :name "Super points", :symbol "★", :subunit nil, :symbol-first nil, :html-entity nil, :iso-numeric nil, :decimal-points nil, :priority nil}
 
-
-Define currencies as vars in your current namespace:
-
-    (defcurrency {:symbol "$", :subunit "Centavo", :name "Argentine Peso", :iso-code "ARS", :iso-numeric "032", 
-    :subunit-to-unit 100, :html-entity "&#x20B1;", :symbol-first true, :priority 100})
-    => #'user/ARS
 
 Load up predefined currencies:
 
@@ -34,7 +27,14 @@ Load up predefined currencies:
 This adds all current national currencies to the bux.currencies namespace using the ISO code as the symbol.
 
     USD
-    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent", :subunit-to-unit 100, :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
+    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
+
+Based on current locale it places the default currency in $
+
+    $
+    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
+
+The var bux.currencies/$ is dynamically bindable so you could bind a different value to it for different users in a ring request.
 
 Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 
@@ -53,6 +53,16 @@ To create a proper BigDecimal from either string or number use the currency as a
     (USD "$1.23")
     => 1.23M
 
+Or using the default currency:
+
+    ($ 1.23)
+    => 1.23M
+
+    ($ 1.234M)
+    => 1.23M
+
+    ($ "$1.23")
+    => 1.23M
 
 To format it without a symbol just use clojure's built in str function
 
