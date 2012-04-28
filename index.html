@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bux by pelle</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Bux</h1>
+        <p>Money and Currency manipulation in Clojure</p>
+        <p class="view"><a href="https://github.com/pelle/bux">View the Project on GitHub <small>pelle/bux</small></a></p>
+        <ul>
+          <li><a href="https://github.com/pelle/bux/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pelle/bux/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pelle/bux">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>bux</h1>
+
+<p>A money and currency manipulation library for Clojure</p>
+
+<p><a href="http://travis-ci.org/pelle/bux"><img src="https://secure.travis-ci.org/pelle/bux.png" alt="Build Status"></a></p>
+
+<h2>Usage</h2>
+
+<p>Add the following to your project.clj</p>
+
+<pre><code>[bux "0.2.1"]
+</code></pre>
+
+<h3>Currencies</h3>
+
+<pre><code>(use 'bux.currency)
+</code></pre>
+
+<p>Create a custom currency using create-currency:</p>
+
+<pre><code>(create-currency {:symbol "★", :name "Super points", :iso-code "super-points"})
+=&gt; #bux.currency.Currency{:iso-code "super-points", :name "Super points", :symbol "★", :subunit nil, :symbol-first nil, :html-entity nil, :iso-numeric nil, :decimal-points nil, :priority nil}
+</code></pre>
+
+<p>Load up predefined currencies:</p>
+
+<pre><code>(use 'bux.currencies)
+</code></pre>
+
+<p>This adds all current national currencies to the bux.currencies namespace using the ISO code as the symbol.</p>
+
+<pre><code>USD
+=&gt; #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
+</code></pre>
+
+<p>Based on current locale it places the default currency in $</p>
+
+<pre><code>$
+=&gt; #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
+</code></pre>
+
+<p>The var bux.currencies/$ is dynamically bindable so you could bind a different value to it for different users in a ring request.</p>
+
+<p>Note currency list lifted from <a href="http://rubymoney.github.com/money/">Ruby Money</a></p>
+
+<h3>Money</h3>
+
+<p>Money is basically BigDecimals set at the scale required for the currency.</p>
+
+<p>To create a proper BigDecimal from either string or number use the currency as a function:</p>
+
+<pre><code>(USD 1.23)
+=&gt; 1.23M
+
+(USD 1.234M)
+=&gt; 1.23M
+
+(USD "$1.23")
+=&gt; 1.23M
+</code></pre>
+
+<p>Or using the default currency:</p>
+
+<pre><code>($ 1.23)
+=&gt; 1.23M
+
+($ 1.234M)
+=&gt; 1.23M
+
+($ "$1.23")
+=&gt; 1.23M
+</code></pre>
+
+<p>To format it without a symbol just use clojure's built in str function</p>
+
+<pre><code>(str (USD 1.23))
+=&gt; "1.00"
+</code></pre>
+
+<p>To format it with a symbol use the str$ function:</p>
+
+<pre><code>(str$ USD 1.23M)
+=&gt; "$1.23"
+</code></pre>
+
+<p>Parse strings directly:</p>
+
+<pre><code>(parse$ USD "$1,123.00")
+=&gt; 1123.00M
+</code></pre>
+
+<h3>Calculations</h3>
+
+<pre><code>(use 'bux.calc)
+</code></pre>
+
+<p>These can use the precision of a currency and take an optional currency parameter for calculating with correct precission.</p>
+
+<p>Percentage:</p>
+
+<pre><code>(pct 1.23M 10)
+=&gt; 0.12M
+
+(pct USD 1.231M 10)
+=&gt; 0.12M
+</code></pre>
+
+<p>With Percentage (can be used for including sales tax, commissions etc.):</p>
+
+<pre><code>(pct+ 1.23M 10)
+=&gt; 1.35M
+
+(pct+ USD 1.23M 10)
+=&gt; 1.35M
+</code></pre>
+
+<p>Percentage discount:</p>
+
+<pre><code>(pct- 1.23M 10)
+=&gt; 1.11&lt;
+
+(pct- USD 1.23M 10)
+=&gt; 1.11M
+</code></pre>
+
+<h2>License</h2>
+
+<p>Copyright (C) 2012 Pelle Braendgaard <a href="http://stakeventures.com">http://stakeventures.com</a></p>
+
+<p>Distributed under the Eclipse Public License, the same as Clojure.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pelle">pelle</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
