@@ -10,11 +10,13 @@
      :html-entity "&#x20B1;", :symbol-first true, :decimal-points 2, :priority 100}]
       (is (= (parse$ c "1.23") 1.23M))
       (is (= (parse$ c "$1.23") 1.23M))
-      (is (= (str 1.23M) "1.23"))
-      (is (= (str$ c 1.23M) "$1.23"))))
+      (is (= (str$ c 1.23M) "$1.23"))
+      (is (= ($ c 1.23M) "$1.23"))))
 
 (deftest testing-various-preset-currencies
-  (let [USD currencies/$]
+  (is (= ($ 1.234M) "$1.23"))
+
+  (let [USD currencies/default$]
     (is (= (round$ USD 1.231M) 1.23M))
     (is (= (round$ USD 1.235M) 1.24M))
     (is (= (str$ USD 1.23M) "$1.23"))

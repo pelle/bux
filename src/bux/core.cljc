@@ -1,4 +1,5 @@
-(ns bux.core)
+(ns bux.core
+  (require [bux.currencies :as currencies]))
 
 (defmulti str$ "formats amount as money for currency with symbol" :iso-code)
 (defmulti parse$ "parse money string value" :iso-code)
@@ -28,6 +29,12 @@
         (str a " " symbol))
       (str a))))
 
-()
+(defn $
+  "Formats amount using specified or default currency"
+  ([amount]
+    ($ currencies/default$ amount))
+  ([c amount]
+    (str$ c amount)))
+
 (defmethod parse$ :default [c value]
   (round$ c (.parse (money-formatter c) (first (re-find #"([0123456789.,]+)" value)))))

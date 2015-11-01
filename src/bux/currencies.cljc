@@ -170,4 +170,4 @@
   (iso->currency (keyword code)))
 
 ;; Default currency
-(def ^:dynamic $ (iso$ (.getCurrencyCode (.getCurrency (java.text.NumberFormat/getCurrencyInstance)))))
+(def ^:dynamic default$ (iso$ (.getCurrencyCode (.getCurrency (java.text.NumberFormat/getCurrencyInstance)))))
