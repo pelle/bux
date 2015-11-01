@@ -5,3 +5,15 @@
 (require '[bux.currencies :as c] :reload)
 $
 c/$
+(str "#,###,###." (reduce str (repeat 2 "#")))
+(str "#,###,###." (repeat 2 "#"))
+(str "#,###,###." (clojure.string/join (repeat 2 "#")))
+(use `bux.core)
+(format$ bux.currencies/default$ 1)
+bux.currencies/default$
+(money-formatter bux.currencies/default$)
+(.format (money-formatter bux.currencies/default$) 1)
+(.format (money-formatter bux.currencies/default$) 1.1)
+(.format (money-formatter bux.currencies/default$) (bigdec 1))
+(use `bux.core :reload)
+(.format (money-formatter bux.currencies/default$) (bigdec 1))

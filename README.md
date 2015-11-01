@@ -8,75 +8,52 @@ A money and currency manipulation library for Clojure and ClojureScript
 
 Add the following to your project.clj
 
-    [bux "0.3.0-SNAPSHOT"]
+    [bux "0.3.0"]
+    
+Note there have been major breaking changes from 0.2.1 to 0.3.0. See below for details.
+
+### ClojureScript
+
+In ClojureScript it should work pretty much the same as Clojure. It is written using .cljc extension so you will need Clojure 1.7 or above for both Clojure and ClojureScript. 
 
 ### Currencies
 
-    (use 'bux.core)
+    (require '[bux.core :as bux :refer [$])
+    (require '[bux.currencies])
 
-Create a custom currency using create-currency:
+You can access all international currencies using the iso$ function in currencies
 
-    (create-currency {:symbol "★", :name "Super points", :iso-code "super-points"})
-    => #bux.currency.Currency{:iso-code "super-points", :name "Super points", :symbol "★", :subunit nil, :symbol-first nil, :html-entity nil, :iso-numeric nil, :decimal-points nil, :priority nil}
+    (bux.currencies/iso$ :USD)
+    => {:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
 
+Based on current locale it places the default currency in currencies/default$
 
-Load up predefined currencies:
+    bux.currencies/default$
+    => {:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
 
-    (use 'bux.currencies)
+The var bux.currencies/default$ is dynamically bindable so you could bind a different value to it for different users in a ring request.
 
-This adds all current national currencies to the bux.currencies namespace using the ISO code as the symbol.
+If you need a full currency list for creating select boxes etc use bux.currencies/currencies:
 
-    USD
-    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
-
-Based on current locale it places the default currency in $
-
-    $
-    => #bux.currency.Currency{:iso-code "USD", :name "United States Dollar", :symbol "$", :subunit "Cent",  :symbol-first true, :html-entity "$", :iso-numeric "840", :priority 1}
-
-The var bux.currencies/$ is dynamically bindable so you could bind a different value to it for different users in a ring request.
+    bux.currencies/currencies
 
 Note currency list lifted from [Ruby Money](http://rubymoney.github.com/money/)
 
 ### Money
 
-Money is basically BigDecimals set at the scale required for the currency.
-
-To create a proper BigDecimal from either string or number use the currency as a function:
-
-    (USD 1.23)
-    => 1.23M
-
-    (USD 1.234M)
-    => 1.23M
-
-    (USD "$1.23")
-    => 1.23M
-
-Or using the default currency:
-
-    ($ 1.23)
-    => 1.23M
-
-    ($ 1.234M)
-    => 1.23M
-
-    ($ "$1.23")
-    => 1.23M
-
 To format it without a symbol just use clojure's built in str function
 
-    (str (USD 1.23))
+    (format$ bux.currencies/default$ 1.23)
     => "1.00"
 
 To format it with a symbol use the str$ function:
 
-    (str$ USD 1.23M)
+    ($ bux.currencies/default$ 1.23)
     => "$1.23"
 
 Parse strings directly:
 
-    (parse$ USD "$1,123.00")
+    (parse$ bux.currencies/default$ "$1,123.00")
     => 1123.00M
 
 ### Calculations
@@ -107,11 +84,22 @@ Percentage discount:
     (pct- 1.23M 10)
     => 1.11<
 
-    (pct- USD 1.23M 10)
+    (pct- bux.currencies/default$ 1.23M 10)
     => 1.11M
+
+
+## Breaking changes
+
+The original library was written early on my clojure journey and still had some bad OO patterns. I have performed various cleanups that will absolutely break existing code. But it should be easy enough to update your code.
+
+- Currencies are now just a map
+- There are no longer vars for each currency. Use (bux.currencies/iso$ :USD) instead.
+- bux.currencies/$ has been renamed to bux.currencies/default$
+
+If you need to, continue using 0.2.1
 
 ## License
 
-Copyright (C) 2012 Pelle Braendgaard http://stakeventures.com
+Copyright (C) 2012-2015 Pelle Braendgaard http://stakeventures.com
 
 Distributed under the Eclipse Public License, the same as Clojure.

@@ -9,3 +9,5 @@
 .idea
 *.iml
 target/
+
+.lein-repl-history
