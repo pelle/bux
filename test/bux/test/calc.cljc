@@ -1,7 +1,8 @@
 (ns bux.test.calc
   (:require [bux.calc :as bc ]
             [bux.currencies :as currencies])
-  (:use [clojure.test]))
+  #?(:clj (:use clojure.test)
+     :cljs (:use cljs.test)))
 
 (deftest percentages
   (let [JPY (currencies/iso$ :JPY)]

@@ -169,5 +169,7 @@
   [code]
   (iso->currency (keyword code)))
 
+(def default-iso #?(:clj (.getCurrencyCode (.getCurrency (java.text.NumberFormat/getCurrencyInstance)))
+                    :cljs :USD))
 ;; Default currency
-(def ^:dynamic default$ (iso$ (.getCurrencyCode (.getCurrency (java.text.NumberFormat/getCurrencyInstance)))))
+(def ^:dynamic default$ (iso$ default-iso))
