@@ -1,6 +1,6 @@
 (ns bux.calc
   (:use [bux.currencies]
-        [bux.currency]))
+        [bux.core]))
 
 (defn pct
   "Calculate percentage of value"

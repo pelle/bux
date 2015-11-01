@@ -1,3 +1,3 @@
-(defproject bux "0.2.1"
+(defproject bux "0.3.0-SNAPSHOT"
   :description "Simple money handling library"
-  :dependencies [[org.clojure/clojure "1.4.0"]])
+  :dependencies [[org.clojure/clojure "1.7.0"]])

@@ -1,6 +1,6 @@
 # bux
 
-A money and currency manipulation library for Clojure
+A money and currency manipulation library for Clojure and ClojureScript
 
 [![Build Status](https://secure.travis-ci.org/pelle/bux.png)](http://travis-ci.org/pelle/bux)
 
@@ -8,11 +8,11 @@ A money and currency manipulation library for Clojure
 
 Add the following to your project.clj
 
-    [bux "0.2.1"]
+    [bux "0.3.0-SNAPSHOT"]
 
 ### Currencies
 
-    (use 'bux.currency)
+    (use 'bux.core)
 
 Create a custom currency using create-currency:
 

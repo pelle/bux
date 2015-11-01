@@ -1,0 +1,7 @@
+(require '[bux.currencies :as c])
+(require '[bux.currencies :as c] :reload)
+(def (symbol "E") 1)
+(def `(symbol "E") 1)
+(require '[bux.currencies :as c] :reload)
+$
+c/$
